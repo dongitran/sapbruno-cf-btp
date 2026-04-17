@@ -11,8 +11,8 @@ service keys into Bruno env files.
 For each call to `fetch(prefix, ctx)`, the provider:
 
 1. Resolves `{ group, branch, app }` from the configured `services[prefix]` binding.
-2. Looks up the corresponding CF org from a branch → subaccount map file (same JSON format as the
-   `branch-btp-subaccount-map.json` used by internal setup scripts).
+2. Looks up the corresponding CF org from a branch → subaccount map file
+   (`cf-branch-map.json` — see format below).
 3. Ensures a live `cf` session — if `cf target` shows no API endpoint or user, it runs
    `cf api <endpoint>` and `cf auth $SAP_EMAIL $SAP_PASSWORD` (or values from provider config).
 4. Runs `cf target -o <org> -s <space>`, `cf app <app> --guid`, `cf curl /v3/apps/<guid>/env`.
@@ -41,7 +41,7 @@ In your `sapbruno.config.json`:
       "auth": { "type": "oauth2-client-credentials" },
       "credentialProvider": {
         "type": "cf-btp",
-        "mapFile": "../../../docs/infrastructure/cf/branch-btp-subaccount-map.json",
+        "mapFile": "./cf-branch-map.json",
         "space": "app",
         "cacheTtlSeconds": 300,
         "services": {
@@ -59,7 +59,7 @@ In your `sapbruno.config.json`:
 
 Then register the provider in your sapbruno setup (see `sapbruno` docs for the provider loader).
 
-`branch-btp-subaccount-map.json` format:
+`cf-branch-map.json` format:
 
 ```json
 {
@@ -93,7 +93,7 @@ Each entry under `services[prefix]` accepts:
 import { cfBtpProvider } from "@sapbruno/cf-btp";
 
 const provider = cfBtpProvider({
-  mapFile: "./branch-btp-subaccount-map.json",
+  mapFile: "./cf-branch-map.json",
   space: "app",
   services: {
     my_group_demo: { group: "my-group", branch: "main", app: "my-demo-app" },
