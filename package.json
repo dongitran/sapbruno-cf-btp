@@ -1,6 +1,6 @@
 {
   "name": "@sapbruno/cf-btp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "SAP Cloud Foundry / BTP credential provider for sapbruno. Extracts xsuaa OAuth2 client_credentials from bound apps via cf CLI.",
   "keywords": [
     "sapbruno",
