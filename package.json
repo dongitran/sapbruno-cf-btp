@@ -1,0 +1,102 @@
+{
+  "name": "@sapbruno/cf-btp",
+  "version": "0.1.0",
+  "description": "SAP Cloud Foundry / BTP credential provider for sapbruno. Extracts xsuaa OAuth2 client_credentials from bound apps via cf CLI.",
+  "keywords": [
+    "sapbruno",
+    "bruno",
+    "sap",
+    "btp",
+    "cloudfoundry",
+    "xsuaa",
+    "oauth2",
+    "credential-provider"
+  ],
+  "license": "MIT",
+  "author": "dongtran",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dongitran/sapbruno-cf-btp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dongitran/sapbruno-cf-btp/issues"
+  },
+  "homepage": "https://github.com/dongitran/sapbruno-cf-btp#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "packageManager": "pnpm@10.15.1",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "spell": "cspell --no-progress \"**/*.{ts,md,json}\"",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest",
+    "check": "pnpm typecheck && pnpm lint && pnpm spell && pnpm test",
+    "prepare": "husky",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  },
+  "peerDependencies": {
+    "sapbruno": ">=0.1.0"
+  },
+  "peerDependenciesMeta": {
+    "sapbruno": {
+      "optional": false
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.5",
+    "@vitest/coverage-v8": "^2.1.8",
+    "cspell": "^8.17.1",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import-x": "^4.6.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.3.0",
+    "prettier": "^3.4.2",
+    "sapbruno": "^0.1.1",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0",
+    "vitest": "^2.1.8"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ],
+    "*.{ts,md,json}": [
+      "cspell --no-must-find-files"
+    ]
+  }
+}
